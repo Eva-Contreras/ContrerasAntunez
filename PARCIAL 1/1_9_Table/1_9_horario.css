@@ -1,0 +1,35 @@
+body
+{
+    margin: 100;
+    padding: 0;
+}
+/* Horario con table */
+table {
+    border-collapse: collapse;
+    font-family: "Audiowide", sans-serif;
+    margin: auto;
+}
+th, td {
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+    width: 140px;
+    height: 70px;
+    transition: background-color 0.3s ease;
+}
+tr:not(:first-child):hover td, 
+tr:not(:first-child):hover th {
+    cursor: pointer;
+    background-color: #dadada !important;
+}
+#horaLibre {
+    background-color: #e3b6f7;
+}
+#horas {
+    font-size: 16px;
+}
+.audiowide-regular {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}

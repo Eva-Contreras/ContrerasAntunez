@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.contenedor
+{
+    background-color: aqua;
+    overflow: auto;
+}
+.caja {
+    width: calc(100% / 4);
+    height: 100px;
+    border: 2px solid #000;
+    background-color: lightpink;
+    float: left;
+}
+@media screen and (max-width: 1000px) {
+    #caja3 {
+        clear:left;
+    }
+    .caja {
+        width: calc(100% / 2);
+    }
+}
