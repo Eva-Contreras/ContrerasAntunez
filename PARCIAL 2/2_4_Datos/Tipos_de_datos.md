@@ -1,0 +1,1 @@
+investigar tipos de datos en javascript
