@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuck Norris Jokes</title>
+</head>
+<body>
+    <button id="btn">Petición XMLHttpRequest</button>
+    <div id="resp"></div>
+    <button id="btn2">Petición Fetch API</button>
+    <div id="resp2"></div>
+    <script>
+        // XMLHttpRequest
+        document.getElementById("btn").addEventListener("click", cargarDatosXMLHttpRequest);
+        function cargarDatosXMLHttpRequest(){
+            let solicitud = new XMLHttpRequest();
+            solicitud.onload = function(){
+                let objetojs = JSON.parse(solicitud.response);
+                document.getElementById("resp").innerHTML = objetojs.value;
+            };
+            solicitud.open("GET", "https://api.chucknorris.io/jokes/random", true);
+            solicitud.send();
+        }
+        // Fetch
+        document.getElementById("btn2").addEventListener("click", cargarDatosFetch);
+        function cargarDatosFetch(){
+            fetch('https://api.chucknorris.io/jokes/random')
+            .then((respuesta) => respuesta.json())
+            .then((datos) => {
+                console.log("Respuesta de la API:", datos);
+                document.getElementById("resp2").innerHTML = datos.value;
+            })
+            .catch((error) => {
+                console.error("Error al obtener el chiste:", error);
+            });
+        }
+    </script>
+</body>
+</html>
