@@ -10,6 +10,8 @@
     <div id="resp"></div>
     <button id="btn2">Petición Fetch API</button>
     <div id="resp2"></div>
+    <button id="btn3">Asynk/Awake</button>
+    <div id="resp3"></div>
     <script>
         // XMLHttpRequest
         document.getElementById("btn").addEventListener("click", cargarDatosXMLHttpRequest);
@@ -34,6 +36,14 @@
             .catch((error) => {
                 console.error("Error al obtener el chiste:", error);
             });
+        }
+        // Async/Await
+        document.getElementById("btn3").addEventListener("click", cargarDatosFetchAA);
+        async function cargarDatosFetchAA(){
+            respuesta = await fetch('https://api.chucknorris.io/jokes/random');
+            datojson = await respuesta.json();
+            console.log(datojson);
+            document.getElementById("resp3").innerHTML = datojson.value;
         }
     </script>
 </body>
