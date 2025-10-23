@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuck Norris Jokes</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id="btn">Petición Fetch API</button>
+    <div id="resp"></div>
+    <script>
+        // Fetch jQuery
+        $("#btn").click(function() {
+            $.ajax({
+                url: 'https://api.chucknorris.io/jokes/random',
+                method: 'GET',
+                dataType: 'json',
+                success: function(datos) {
+                    console.log("Respuesta de la API:", datos);
+                    $("#resp").html(datos.value);
+                },
+                error: function(error) {
+                    console.error("Error al obtener el chiste:", error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
