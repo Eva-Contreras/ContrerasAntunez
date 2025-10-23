@@ -8,29 +8,58 @@
 </head>
 <body>
     <form id="form" action="https://httpbin.org/post" method="POST" target="resultadoPOST">
+
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" name="nombre">
 
         <label for="apellido">Apellido</label>
         <input type="text" id="apellido" name="apellido">
 
-        <button type="submit">Enviar</button>
-        <button type="button" id="btnFetch">Enviar con Fetch API</button>
+        <button type="submit">Enviar (Formulario Tradicional)</button>
+        <button type="button" id="btnFetch">Enviar con Fetch API (Muestra en DOM)</button>
     </form>
-    <iframe name="resultadoPOST"></iframe>
+    
+    <details>
+        <summary>Respuesta de Fetch API (JSON)</summary>
+        <pre id="fetch-resultado"></pre>
+    </details>
+
+    <iframe name="resultadoPOST" style="width: 100%; height: 200px; border: 1px solid #ccc;"></iframe>
+    
     <script>
         document.getElementById('btnFetch').addEventListener('click', function() {
-            const datosForm = new FormData(document.getElementById("form"));
-            const cadenaUrl = new URLSearchParams(datosForm).toString();
-            
+            const formElement = document.getElementById("form");
+            const datosForm = new FormData(formElement);
+            // Se recomienda usar JSON para APIs, no x-www-form-urlencoded
+            // Para JSON:
+            const datosJSON = {};
+            datosForm.forEach((valor, clave) => {
+                datosJSON[clave] = valor;
+            });
+            const bodyData = JSON.stringify(datosJSON);
+            const contentType = 'application/json';
+
             fetch('https://httpbin.org/post', { 
                 method: 'POST', 
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: cadenaUrl 
+                headers: { 
+                    'Content-Type': contentType 
+                },
+                body: bodyData
             })
             .then(response => response.json())
-            .then(dato => console.log(dato))
-            .catch(error => console.error('Error:', error));
+            .then(dato => {
+                // 1. Imprime en consola (como estaba)
+                console.log(dato);
+                
+                // 2. Muestra el resultado en el DOM
+                document.getElementById('fetch-resultado').textContent = 
+                    JSON.stringify(dato, null, 2); // Formatea el JSON para mejor lectura
+            })
+            .catch(error => {
+                const resultadoElement = document.getElementById('fetch-resultado');
+                resultadoElement.textContent = `Error al enviar los datos: ${error}`;
+                console.error('Error:', error);
+            });
         });
     </script>
 </body>
