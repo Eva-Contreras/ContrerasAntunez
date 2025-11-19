@@ -1,7 +1,15 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 
-app.use (express.json()); // Esta función parsea el body de la petición y si tree JSON la agregar a prp body
+app.use (express.json()); // Esta función parsea el body de la petición y si trae JSON lo agrega a req.body
+app.use(cors()) // Habilitar Cors para todas las rutas
+
+app.get('/clientes', cors(),(req,res)=>{ // Cors habilitado solo para esta ruta
+  // Manejo de la ruta...
+  console.log(req.query);
+  res.send('Hola Clientes!')
+})
 
 app.get('/alumnos', (req, res) => {
   console.log(req.query);
