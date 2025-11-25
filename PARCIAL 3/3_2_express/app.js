@@ -2,6 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 
+const PORT = process.env.PORT || 3000
+
 app.use (express.json()); // Esta función parsea el body de la petición y si trae JSON lo agrega a req.body
 app.use(cors()) // Habilitar Cors para todas las rutas
 
@@ -26,6 +28,6 @@ app.post('/directivos', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log(`Example app listening on port 3000`)
 })
